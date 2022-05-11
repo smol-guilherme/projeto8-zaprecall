@@ -1,45 +1,91 @@
 import Logo from "./Logo";
 import React from "react";
 
-
-function Bottom() {
-    return(
-        <div>
-            oi
+function Question({ question, flipAction }) {
+    return (
+        <div className="card">
+            <div className="text-content">
+                {question}
+            </div> 
+            { <Flip flip={flipAction} /> }
         </div>
     )
 }
 
+function Answer({ answer }) {
+    return (
+        <div className="card">
+            <div className="text-content">
+                {answer}
+            </div>
+            <div className="button-box">
+                <div className="state-1">Não lembrei</div>
+                <div className="state-2">Quase não lembrei</div>
+                <div className="state-3">Zap!</div>
+            </div>
+        </div>
+    )
+}
 
-export default function Game({ 
-    start }) {
-    const [side, setSide] = React.useState(false)
-    const button1 = 'gira Pirueta'
-    const button2 = 'but1 but2 but3'
-    const card = {
-        question: 'Ah meu deus?',
-        answer: 'Meu deus!',
-        state: undefined
+function Flip({ flip }) {
+    return (
+        <div className="flip">
+            <img onClick={flip} src="./content/Vector.png" />
+        </div>
+    )
+}
+
+function Bottom() {
+    return (
+        <div className="progress">
+            0/4 CONCLUÍDOS
+        </div>
+    )
+}
+
+export default function Game({ start }) {
+    const [side, setSide] = React.useState(false);
+    const [done, setDone] = React.useState(0);
+    const [cards, setCards] = React.useState([
+        {
+            question: 'Pergunta 01?',
+            answer: 'Resposta 01!',
+            theme: 'default',
+            state: undefined,
+            flipped: false
+        },
+        {
+            question: 'Pergunta 02?',
+            answer: 'Resposta 02!',
+            theme: 'default',
+            state: undefined,
+            flipped: false
+        },
+        {
+            question: 'Pergunta 03?',
+            answer: 'Resposta 03!',
+            theme: 'default',
+            state: undefined,
+            flipped: false
+        },
+        {
+            question: 'Pergunta 04?',
+            answer: 'Resposta 04!',
+            theme: 'default',
+            state: undefined,
+            flipped: false
+        }
+    ]);
+
+    function flipCard(index) {
+        cards[index].flipped = !cards[index].flipped;
+        setCards([...cards])
     }
-    const cards = [
-        {
-            question: 'Ah meu deus?',
-            answer: 'Meu deus!',
-            state: undefined
-        },
-        {
-            question: 'Ah meu deus?',
-            answer: 'Meu deus!',
-            state: undefined
-        },
-    ]
+
     return (
         <div className="main-screen">
             <Logo />
-            <div className="card">
-                <div>{ !side ? card.question : card.answer}</div>
-                <div>{ !side ? button1 : button2}</div>
-            </div>
+                { cards.map((item, index) => !item.flipped ? <Question key={index} question={item.question} flipAction={() => flipCard(index)}/> : <Answer key={index} answer={item.answer} />)}
             <Bottom />
         </div>
     )

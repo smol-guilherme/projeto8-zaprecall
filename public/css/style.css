@@ -2,6 +2,20 @@
 
 body {
     size: 14px;
+    color: #333333;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+}
+
+.logo > img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
 }
 
 .main-screen {
@@ -10,7 +24,6 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     padding: 5%;
     margin: auto;
@@ -18,6 +31,78 @@ body {
     top: 0;
     left: 0;
     box-sizing: border-box;
+}
+
+.card {
+    width: 100%;
+    min-height: 80px;
+    /* height: 140px; */
+    margin: 12px 7%;
+    padding: 5px 10px;
+    background-color: #FFFFD4;
+    box-sizing: border-box;
+    border-radius: 12px;
+}
+
+.text-content {
+    width: 100%;
+    height: 70px;
+    box-sizing: border-box;
+}
+
+.button-box {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
+}
+
+.flip {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    justify-content: right;
+}
+
+.state-1, .state-2, .state-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    border-radius: 5px;
+    height: 40px;
+    width: 30%;
+    font-size: 12px;
+}
+
+.state-1 {
+    background-color: #FF3030;
+}
+
+.state-2 {
+    background-color: #FF922E;
+}
+
+.state-3 {
+    background-color: #2FBE34;
+}
+
+.progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 18px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 40px;
+    height: 60px;
+    background-color: #FFFFFF;
 }
 
 .hidden {
