@@ -1,11 +1,78 @@
 import Logo from "./Logo";
 import React from "react";
 
-function Cover({ reveal }) {
+const DEFAULTS = [
+    {   
+        question: 'Pergunta 01?',
+        answer: 'Resposta 01!',
+        theme: 'default',
+        flipped: false,
+        revealed: false,
+        result: 0
+    },
+    {
+        question: 'Pergunta 02?',
+        answer: 'Resposta 02!',
+        theme: 'default',
+        flipped: false,
+        revealed: false,
+        result: 0
+    },
+    {
+        question: 'Pergunta 03?',
+        answer: 'Resposta 03!',
+        theme: 'default',
+        flipped: false,
+        revealed: false,
+        result: 0
+    },
+    {
+        question: 'Pergunta 04?',
+        answer: 'Resposta 04!',
+        theme: 'default',
+        flipped: false,
+        revealed: false,
+        result: 0
+    },
+    {
+        question: 'Pergunta 05?',
+        answer: 'Resposta 05!',
+        theme: 'default',
+        flipped: false,
+        revealed: false,
+        result: 0
+    },
+    {
+        question: 'Pergunta 06?',
+        answer: 'Resposta 06!',
+        theme: 'default',
+        flipped: false,
+        revealed: false,
+        result: 0
+    },
+    {
+        question: 'Pergunta 07?',
+        answer: 'Resposta 07!',
+        theme: 'default',
+        flipped: false,
+        revealed: false,
+        result: 0
+    },
+    {
+        question: 'Pergunta 08?',
+        answer: 'Resposta 08!',
+        theme: 'default',
+        flipped: false,
+        revealed: false,
+        result: 0
+    },
+];
+
+function Cover({ index, reveal, icons, result }) {
     return(
         <div className="cover">
-            Pergunta {'aaaa'}
-            <ion-icon onClick={reveal} name="play-outline"></ion-icon>
+            { result === 0 ? <h1> Pergunta {index+1} </h1> : <h1 className={'result-'+result.toString()}> Pergunta {index+1} </h1> } 
+            <ion-icon onClick={reveal} name={icons[result]}></ion-icon>
         </div>
     )
 }
@@ -50,60 +117,62 @@ function Answer({ index, answer, setResult }) {
     )
 }
 
-// <ion-icon name="help-circle"></ion-icon>
-// <ion-icon name="checkmark-circle"></ion-icon>
-// <ion-icon name="close-circle"></ion-icon>
+function Conclusion({ results }) {
+    console.log(results)
+    return(
+        <>
+            { results.includes(1) ?
+                <div className="conclusion">
+                    <h2><img src="./content/sad.png" />Putz!</h2>
+                    <div>Ainda faltam alguns...</div>
+                    <div>Mas não desanime!</div>
+                </div> :
+                <div className="conclusion">
+                    <h2><img src="./content/partying-face.png" />Parabéns!</h2>
+                    <div>Você não esqueceu de nenhum flashcard!</div>
+                </div>
+            }
+        </>
+    )
+}
 
-function Bottom({ count, answers }) {
-    const icons = ["close-circle", "help-circle", "checkmark-circle"]
+function Bottom({ count, results, icons }) {
+
+
     return (
         <div className="progress">
+            { count !== 4 ? <></> : <Conclusion results={results} /> }
             { count }/4 CONCLUÍDOS
-            { answers.length === 0 ? " " : answers.map((icon) => <ion-icon name={icons[icon-1]}></ion-icon>) }
+            <div>
+                { results.length === 0 ? " " : results.map((icon, index) => <ion-icon key={index} name={icons[icon]}></ion-icon>) }
+            </div>
         </div>
     )
 }
 
 export default function Game({ start }) {
+    const icons = ["play-outline", "close-circle", "help-circle", "checkmark-circle"]
     const [count, setCount] = React.useState(0);
-    const [answers, setAnswers] = React.useState([])
-    const [cards, setCards] = React.useState([
-        {   
-            question: 'Pergunta 01?',
-            answer: 'Resposta 01!',
-            theme: 'default',
-            flipped: false,
-            revealed: false,
-            result: undefined
-        },
-        {
-            question: 'Pergunta 02?',
-            answer: 'Resposta 02!',
-            theme: 'default',
-            flipped: false,
-            revealed: false,
-            result: undefined
-        },
-        {
-            question: 'Pergunta 03?',
-            answer: 'Resposta 03!',
-            theme: 'default',
-            flipped: false,
-            revealed: false,
-            result: undefined
-        },
-        {
-            question: 'Pergunta 04?',
-            answer: 'Resposta 04!',
-            theme: 'default',
-            flipped: false,
-            revealed: false,
-            result: undefined
+    const [answers, setAnswers] = React.useState([]);
+    const [cards, setCards] = React.useState(DEFAULTS);
+    const [questionSet, setQuestionSet] = React.useState(pickFour());
+    console.log(questionSet)
+    
+    function pickFour() {
+        if(cards.length !== 4) {
+            const indexes = [];
+            while(indexes.length !== 4) {
+                let rand = Math.floor(Math.random() * cards.length)
+                if(!indexes.includes(rand))
+                    indexes.push(rand)
+            }
+            const newSet = indexes.map((index) => cards[index])
+            setCards(newSet)    
         }
-    ]);
+    }
 
     function revealCard(revealIndex) {
-        cards[revealIndex].revealed = true;
+        cards[revealIndex].revealed = !cards[revealIndex].revealed;
         setCards([ ...cards ]);
     }
 
@@ -113,11 +182,11 @@ export default function Game({ start }) {
     }
 
     function setResult(resultIndex, result = 0) {
-        if (cards[resultIndex].result === undefined) {
+        if (cards[resultIndex].result === 0) {
             cards[resultIndex].result = result;
+            revealCard(resultIndex);
             setCount(count + 1);
-            setAnswers(answers + result)
-            console.log(answers)
+            setAnswers([...answers, result]);
             setCards([ ...cards ]);
         }
     }
@@ -126,11 +195,11 @@ export default function Game({ start }) {
         <div className="main-screen">
             <Logo />
             { 
-                cards.map((card, index) => !card.revealed 
-                ? <Cover reveal={() => revealCard(index)} /> 
+                cards.map((card, index) => !card.revealed
+                ? <Cover key={index} index={index} reveal={() => revealCard(index)} icons={icons} result={card.result} /> 
                 : <Cards key={index} setResult={setResult} flipCard={flipCard} index={index} card={card} /> )
             }
-            <Bottom results={answers} count={count} />
+            <Bottom results={answers} count={count} icons={icons} />
         </div>
     )
 }

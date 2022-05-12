@@ -4,8 +4,9 @@ import Game from "./Game";
 function Main({ start }) {
     return (
         <div className="main-screen">
-            <img className="main-logo" src="./content/logo.png" alt="Imagem do zapcoisa" />
-            <div onClick={start}>Iniciar Zap Zap</div>
+            <img className="main-logo" src="./content/logo.png" alt="./content/flash.png" />
+            <div className="title">ZapRecall</div>
+            <button className="button" onClick={start}>Iniciar Recall</button>
         </div>
     )
 }

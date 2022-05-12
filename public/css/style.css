@@ -1,11 +1,28 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Recursive:wght,CASL@400,1;700,1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
 body {
-    size: 14px;
+    font-family: 'Recursive', sans-serif;
+    font-size: 16px;
     color: #333333;
 }
 
+ion-icon[name="close-circle"] {
+    color: #FF3030;
+}
+
+ion-icon[name="help-circle"] {
+    color: #FF922E;
+}
+
+ion-icon[name="checkmark-circle"] {
+    color: #2FBE34;
+}
+
 .logo {
+    font-family: 'Righteous', cursive;
+    font-size: 36px;
+    color: #FFFFFF;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,7 +43,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 5%;
-    margin: auto;
+    margin: 0 auto;
     position: fixed;
     top: 0;
     left: 0;
@@ -36,25 +53,54 @@ body {
 .main-logo {
     min-height: 110px;
     min-width: 110px;
-    object-fit: fill;
+    object-fit: contain;
     margin: 0 auto;
-    margin-top: 40%;
+    margin-top: 50%;
     margin-bottom: 10%;
+}
+
+.title {
+    font-family: 'Righteous', cursive;
+    font-size: 36px;
+    color: #FFFFFF;
+    margin-bottom: 40px;
+}
+
+.button {
+    font-family: 'Recursive', sans-serif;
+    font-size: 18px;
+    color: #D70900;
+    width: 80%;
+    height: 60px;
+    background-color: #FFFFFF;
+    border: 2px solid #D70900;
+    border-radius: 9px;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 
 .cover, .card {
     width: 100%;
-    margin: 12px 7%;
+    min-height: 60px;
+    margin: 12px 20%;
     padding: 5px 10px;
+    border-radius: 6px;
     box-sizing: border-box;    
-    border-radius: 12px;
 }
 
 .cover {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    font-size: 18px;
+    font-weight: bold;
     background-color: #FFFFFF;
+}
+
+.cover > ion-icon {
+    font-size: 28px;
+    min-width: 20px;
+    min-height: 20px;
 }
 
 .card {
@@ -100,16 +146,32 @@ body {
     background-color: #FF3030;
 }
 
+.result-1 {
+    color: #FF3030;
+    text-decoration: line-through;
+}
+
 .state-2 {
     background-color: #FF922E;
+}
+
+.result-2 {
+    color: #FF922E;
+    text-decoration: line-through;
 }
 
 .state-3 {
     background-color: #2FBE34;
 }
 
+.result-3 {
+    color: #2FBE34;
+    text-decoration: line-through;
+}
+
 .progress {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -118,9 +180,29 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    min-height: 40px;
-    height: 60px;
+    min-height: 60px;
     background-color: #FFFFFF;
+}
+
+.conclusion {
+    text-align: center;
+    width: 100%;
+    margin: 15px auto;
+}
+
+.conclusion h2 {
+    width: 100%;
+    margin-bottom: 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.conclusion img {
+    width: 18px;
+    height: 18px;
 }
 
 .hidden {
