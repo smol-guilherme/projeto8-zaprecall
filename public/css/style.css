@@ -33,15 +33,33 @@ body {
     box-sizing: border-box;
 }
 
-.card {
+.main-logo {
+    min-height: 110px;
+    min-width: 110px;
+    object-fit: fill;
+    margin: 0 auto;
+    margin-top: 40%;
+    margin-bottom: 10%;
+}
+
+.cover, .card {
     width: 100%;
-    min-height: 80px;
-    /* height: 140px; */
     margin: 12px 7%;
     padding: 5px 10px;
-    background-color: #FFFFD4;
-    box-sizing: border-box;
+    box-sizing: border-box;    
     border-radius: 12px;
+}
+
+.cover {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #FFFFFF;
+}
+
+.card {
+    min-height: 80px;
+    background-color: #FFFFD4;
 }
 
 .text-content {

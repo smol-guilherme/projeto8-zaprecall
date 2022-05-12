@@ -4,7 +4,7 @@ import Game from "./Game";
 function Main({ start }) {
     return (
         <div className="main-screen">
-            <img src="https://www.significadodossonhos.net.br/wp-content/uploads/2012/10/significado-dos-sonhos-peixe1.jpg" alt="Imagem do zapcoisa" />
+            <img className="main-logo" src="./content/logo.png" alt="Imagem do zapcoisa" />
             <div onClick={start}>Iniciar Zap Zap</div>
         </div>
     )
