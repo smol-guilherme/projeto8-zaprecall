@@ -23,15 +23,22 @@ ion-icon[name="checkmark-circle"] {
     font-family: 'Righteous', cursive;
     font-size: 36px;
     color: #FFFFFF;
+    background-color: #FB6B6B;
     display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
-    margin: 20px auto;
+    margin: 0 auto;
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
 .logo > img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
 }
 
@@ -42,12 +49,13 @@ ion-icon[name="checkmark-circle"] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5%;
+    padding: 35% 10%;
     margin: 0 auto;
     position: fixed;
     top: 0;
     left: 0;
     box-sizing: border-box;
+    overflow-y: scroll;
 }
 
 .main-logo {
@@ -55,7 +63,7 @@ ion-icon[name="checkmark-circle"] {
     min-width: 110px;
     object-fit: contain;
     margin: 0 auto;
-    margin-top: 50%;
+    margin-top: 5vh;
     margin-bottom: 10%;
 }
 
@@ -66,30 +74,54 @@ ion-icon[name="checkmark-circle"] {
     margin-bottom: 40px;
 }
 
+.forms {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.quota, .theme, button {
+    background-color: #FFFFFF;
+    height: 40px;
+    width: 80%;
+    border: none;
+    border-radius: 5px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+.quota {
+    color: #FB6B6B;
+}
+
+.theme {
+    color: #ADADAD;
+}
+
 .button {
     font-family: 'Recursive', sans-serif;
     font-size: 18px;
     color: #D70900;
-    width: 80%;
+    border: 1px solid #D70900;
     height: 60px;
-    background-color: #FFFFFF;
-    border: 2px solid #D70900;
-    border-radius: 9px;
-    box-sizing: border-box;
     cursor: pointer;
 }
 
 .cover, .card {
     width: 100%;
-    min-height: 60px;
     margin: 12px 20%;
-    padding: 5px 10px;
+    padding: 12px 10px;
     border-radius: 6px;
     box-sizing: border-box;    
 }
 
 .cover {
     display: flex;
+    min-height: 60px;
     justify-content: space-between;
     align-items: center;
     font-size: 18px;
@@ -104,8 +136,9 @@ ion-icon[name="checkmark-circle"] {
 }
 
 .card {
-    min-height: 80px;
+    min-height: 130px;
     background-color: #FFFFD4;
+    position: relative;
 }
 
 .text-content {
@@ -124,10 +157,15 @@ ion-icon[name="checkmark-circle"] {
 }
 
 .flip {
-    width: 100%;
     height: 20px;
-    display: flex;
-    justify-content: right;
+    width: 20px;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+}
+
+.flip > * {
+    font-size: 18px;
 }
 
 .state-1, .state-2, .state-3 {
@@ -203,6 +241,16 @@ ion-icon[name="checkmark-circle"] {
 .conclusion img {
     width: 18px;
     height: 18px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 .hidden {
