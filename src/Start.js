@@ -128,9 +128,7 @@ export default function Start() {
     }
 
     function startGame() {
-        if (!start && options[0] !== undefined) {
-            setStart(!start)
-        }
+        setStart(!start)
     }
 
     return (
@@ -138,7 +136,7 @@ export default function Start() {
             {
                 !start ?
                     <Main options={options} handleData={handleData} /> :
-                    <Game quota={options[0]} theme={options[1]} DEFAULTS={DEFAULTS} start={startGame} />
+                    <Game quota={options[0]} theme={options[1]} DEFAULTS={DEFAULTS} start={startGame} setOptions={setOptions} />
             }
         </div>
     )

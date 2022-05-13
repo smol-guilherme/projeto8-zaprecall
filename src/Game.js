@@ -4,21 +4,31 @@ import React from "react";
 const RNG = 0.33;
 
 function Cover({ index, reveal, icons, result }) {
-    return(
-        <div className="cover">
-            { result === 0 ? <h1> Pergunta {index+1} </h1> : <h1 className={'result-'+result.toString()}> Pergunta {index+1} </h1> } 
-            <ion-icon onClick={reveal} name={icons[result]}></ion-icon>
-        </div>
+    return (
+        <>
+            {
+                result === 0 ?
+                    <div className="cover">
+                        <h1> Pergunta {index + 1} </h1>
+                        <ion-icon onClick={reveal} name={icons[result]}></ion-icon>
+                    </div>
+                    :
+                    <div className="cover">
+                        <h1 className={'result-' + result.toString()}> Pergunta {index + 1} </h1>
+                        <ion-icon name={icons[result]}></ion-icon>
+                    </div>
+            }
+        </>
     )
 }
 
 function Cards({ index, card, flipCard, setResult }) {
-    return(
+    return (
         <>
             {
-                !card.flipped 
-                ? <Question key={index} flipCard={flipCard} index={index} question={card.question} />
-                : <Answer key={index} card={card} answer={card.answer} setResult={setResult} index={index} />
+                !card.flipped
+                    ? <Question key={index} flipCard={flipCard} index={index} question={card.question} />
+                    : <Answer key={index} card={card} answer={card.answer} setResult={setResult} index={index} />
             }
         </>
     )
@@ -53,12 +63,11 @@ function Answer({ index, answer, setResult }) {
 }
 
 function Conclusion({ results, quota }) {
-    console.log(results)
-    let zapNums = 0
+    let zapNums = 0;
     results.forEach(item => item === 3 ? zapNums++ : zapNums);
-    return(
+    return (
         <>
-            { (results.includes(1) || quota < zapNums) ?
+            {((zapNums < quota) || (results.includes(1))) ?
                 <div className="conclusion">
                     <h2><img src="./content/sad.png" />Putz!</h2>
                     <div>Ainda faltam alguns...</div>
@@ -73,46 +82,70 @@ function Conclusion({ results, quota }) {
     )
 }
 
-function Bottom({ count, results, quota, max, icons }) {
+function Bottom({ count, results, quota, max, icons, reset }) {
     return (
         <div className="progress">
-            { count !== max ? <></> : <Conclusion results={results} quota={quota} /> }
-            { count }/{max} CONCLUÍDOS
-            <div>
-                { results.length === 0 ? " " : results.map((icon, index) => <ion-icon key={index} name={icons[icon]}></ion-icon>) }
-            </div>
+            {count !== max ? <></> : <Conclusion results={results} quota={quota} reset={reset} />}
+            {count}/{max} CONCLUÍDOS
+            {results.length !== max ?
+                <div>
+                    {results.map((icon, index) => <ion-icon key={index} name={icons[icon]}></ion-icon>)}
+                </div> :
+                <div>
+                    {results.map((icon, index) => <ion-icon key={index} name={icons[icon]}></ion-icon>)}
+                    <div className="reset" onClick={reset}>REINICIAR RECALL</div>
+                </div>
+            }
         </div>
     )
 }
 
-export default function Game({ start, DEFAULTS, theme, quota }) {
+export default function Game({ start, DEFAULTS, theme, quota, setOptions }) {
     const icons = ["play-outline", "close-circle", "help-circle", "checkmark-circle"]
     const [count, setCount] = React.useState(0);
+    const [playing, setPlaying] = React.useState(false);
     const [answers, setAnswers] = React.useState([]);
     const [cards, setCards] = React.useState(pickTheme());
-    
+
     function randomize() {
         return Math.random() - RNG;
     }
-    
+
+    function resetAll() {
+        setCards([]);
+        setPlaying(!playing);
+        setOptions([]);
+        setCount(0);
+        setAnswers([]);
+        start();
+    }
+
+    console.log(cards)
+    console.log(DEFAULTS)
+
     function pickTheme() {
-        if(theme.length !== 0) {
-            const newSet = DEFAULTS.filter((card) => card.theme === theme)
-            newSet.sort(randomize)
-            return newSet;    
+        if(!playing) {
+            console.log('hi')
+            if (theme.length !== 0) {
+                console.log('hi2')
+                const newSet = [...DEFAULTS.filter((card) => card.theme === theme)];
+                setPlaying(!playing);
+                return newSet.sort(randomize);
+            }
+            setPlaying(!playing);
+            const defaultSet = [...DEFAULTS]
+            return defaultSet.sort(randomize);
         }
-        DEFAULTS.sort(randomize)
-        return DEFAULTS;
     }
 
     function revealCard(revealIndex) {
         cards[revealIndex].revealed = !cards[revealIndex].revealed;
-        setCards([ ...cards ]);
+        setCards([...cards]);
     }
 
     function flipCard(flipIndex) {
         cards[flipIndex].flipped = true
-        setCards([ ...cards ]);
+        setCards([...cards]);
     }
 
     function setResult(resultIndex, result = 0) {
@@ -121,19 +154,19 @@ export default function Game({ start, DEFAULTS, theme, quota }) {
             revealCard(resultIndex);
             setCount(count + 1);
             setAnswers([...answers, result]);
-            setCards([ ...cards ]);
+            setCards([...cards]);
         }
     }
 
     return (
         <div className="main-screen">
             <Logo />
-            { 
+            {
                 cards.map((card, index) => !card.revealed
-                ? <Cover key={index} index={index} reveal={() => revealCard(index)} icons={icons} result={card.result} /> 
-                : <Cards key={index} setResult={setResult} flipCard={flipCard} index={index} card={card} /> )
+                    ? <Cover key={index} index={index} reveal={() => revealCard(index)} icons={icons} result={card.result} />
+                    : <Cards key={index} setResult={setResult} flipCard={flipCard} index={index} card={card} />)
             }
-            <Bottom results={answers} quota={quota} count={count} max={cards.length} icons={icons} />
+            <Bottom results={answers} quota={quota} count={count} max={cards.length} icons={icons} reset={resetAll} />
         </div>
     )
 }
