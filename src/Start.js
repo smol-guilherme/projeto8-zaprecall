@@ -79,7 +79,7 @@ function Forms({ handleData }) {
 
     return(
         <form className="forms" onSubmit={handleData}>
-            <input className="quota" placeholder="Escolha sua meta de zaps" type="number" min={0} max={DEFAULTS.length} required></input>
+            <input className="quota" placeholder="Escolha sua meta de zaps" type="number" min={1} max={DEFAULTS.length} required></input>
             <select className="theme" >
                 <option value="" disabled selected>Selecione seu deck</option>
                 {themes.map((t, index) => <option key={index} value={t}>{t}</option>)}

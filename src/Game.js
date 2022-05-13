@@ -71,11 +71,11 @@ function Conclusion({ results, quota }) {
     )
 }
 
-function Bottom({ count, results, quota, icons }) {
+function Bottom({ count, results, quota, max, icons }) {
     return (
         <div className="progress">
-            { count !== 4 ? <></> : <Conclusion results={results} quota={quota} /> }
-            { count }/4 CONCLUÍDOS
+            { count !== max ? <></> : <Conclusion results={results} quota={quota} /> }
+            { count }/{max} CONCLUÍDOS
             <div>
                 { results.length === 0 ? " " : results.map((icon, index) => <ion-icon key={index} name={icons[icon]}></ion-icon>) }
             </div>
@@ -126,7 +126,7 @@ export default function Game({ start, DEFAULTS, theme, quota }) {
                 ? <Cover key={index} index={index} reveal={() => revealCard(index)} icons={icons} result={card.result} /> 
                 : <Cards key={index} setResult={setResult} flipCard={flipCard} index={index} card={card} /> )
             }
-            <Bottom results={answers} quota={quota} count={count} icons={icons} />
+            <Bottom results={answers} quota={quota} count={count} max={cards.length} icons={icons} />
         </div>
     )
 }

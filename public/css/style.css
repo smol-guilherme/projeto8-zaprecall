@@ -30,9 +30,6 @@ ion-icon[name="checkmark-circle"] {
     align-items: center;
     margin: 0 auto;
     padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
     z-index: 1;
 }
 
@@ -49,13 +46,12 @@ ion-icon[name="checkmark-circle"] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 35% 10%;
+    padding: 5vh 25%;
     margin: 0 auto;
     position: fixed;
     top: 0;
     left: 0;
     box-sizing: border-box;
-    overflow-y: scroll;
 }
 
 .main-logo {
@@ -255,4 +251,13 @@ input[type=number] {
 
 .hidden {
     display: none;
+}
+
+@media (max-width: 614px) {
+    .main-screen {
+        padding: 10% 10%;
+        padding-bottom: 15%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
 }
