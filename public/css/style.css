@@ -54,6 +54,7 @@ ion-icon[name="checkmark-circle"] {
     top: 0;
     left: 0;
     box-sizing: border-box;
+    overflow-y: scroll;
 }
 
 .main-logo {
@@ -138,7 +139,7 @@ ion-icon[name="checkmark-circle"] {
 
 .cover, .card {
     width: 100%;
-    margin: 12px 20%;
+    margin: 6px 20%;
     padding: 12px 10px;
     border-radius: 6px;
     box-shadow: 0 3px 2px #33333370;
@@ -287,7 +288,6 @@ input[type=number] {
     .main-screen {
         padding: 10% 10%;
         padding-bottom: 15%;
-        overflow-y: scroll;
         overflow-x: hidden;
     }
 }

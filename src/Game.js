@@ -103,9 +103,8 @@ function Bottom({ count, results, quota, max, icons, reset }) {
 export default function Game({ start, DEFAULTS, theme, quota, setOptions }) {
     const icons = ["play-outline", "close-circle", "help-circle", "checkmark-circle"]
     const [count, setCount] = React.useState(0);
-    const [playing, setPlaying] = React.useState(false);
     const [answers, setAnswers] = React.useState([]);
-    const [cards, setCards] = React.useState(pickTheme());
+    const [cards, setCards] = React.useState(pickTheme);
 
     function randomize() {
         return Math.random() - RNG;
@@ -113,7 +112,6 @@ export default function Game({ start, DEFAULTS, theme, quota, setOptions }) {
 
     function resetAll() {
         setCards([]);
-        setPlaying(!playing);
         setOptions([]);
         setCount(0);
         setAnswers([]);
@@ -124,33 +122,27 @@ export default function Game({ start, DEFAULTS, theme, quota, setOptions }) {
     console.log(DEFAULTS)
 
     function pickTheme() {
-        if(!playing) {
-            console.log('hi')
-            if (theme.length !== 0) {
-                console.log('hi2')
-                const newSet = [...DEFAULTS.filter((card) => card.theme === theme)];
-                setPlaying(!playing);
-                return newSet.sort(randomize);
-            }
-            setPlaying(!playing);
-            const defaultSet = [...DEFAULTS]
-            return defaultSet.sort(randomize);
+        if (theme.length !== 0) {
+            const newSet = [...DEFAULTS.filter((card) => card.theme === theme)];
+            return newSet.sort(randomize);
         }
+        const defaultSet = [...DEFAULTS]
+        return defaultSet.sort(randomize);
     }
 
     function revealCard(revealIndex) {
-        cards[revealIndex].revealed = !cards[revealIndex].revealed;
+        cards[revealIndex] = { ...cards[revealIndex], revealed: !cards[revealIndex].revealed };
         setCards([...cards]);
     }
 
     function flipCard(flipIndex) {
-        cards[flipIndex].flipped = true
+        cards[flipIndex] = { ...cards[flipIndex], flipped: !cards[flipIndex].flipped };
         setCards([...cards]);
     }
 
     function setResult(resultIndex, result = 0) {
         if (cards[resultIndex].result === 0) {
-            cards[resultIndex].result = result;
+            cards[resultIndex] = { ...cards[resultIndex], result: result };
             revealCard(resultIndex);
             setCount(count + 1);
             setAnswers([...answers, result]);
