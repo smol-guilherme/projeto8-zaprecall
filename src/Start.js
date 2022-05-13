@@ -66,6 +66,86 @@ const DEFAULTS = [
         revealed: false,
         result: 0
     },
+    {
+        question: 'Quem é o pai do gohan?',
+        answer: 'Piccolo (pai é quem cria)', 
+        theme: 'DragonBall', 
+        flipped: false,
+        revealed: false,
+        result: 0
+    },
+    {
+        question: 'Quantos saiyajins restaram?',
+        answer: '6 - Goku, Vegeta, Gohan, Goten, Trunks, Pan', 
+        theme: 'DragonBall', 
+        flipped: false,
+        revealed: false,
+        result: 0
+    },
+    {
+        question: 'Qual o verdadeiro nome do Goku?',
+        answer: 'Kakarotto', 
+        theme: 'DragonBall', 
+        flipped: false,
+        revealed: false,
+        result: 0
+    },
+    {
+        question: 'Oi _ Goku!',
+        answer: 'eu sou', 
+        theme: 'DragonBall', 
+        flipped: false,
+        revealed: false,
+        result: 0
+    },
+    {
+        question: 'Qualquer inimigo...Vegeta: ___',
+        answer: 'Inseto!', 
+        theme: 'DragonBall', 
+        flipped: false,
+        revealed: false,
+        result: 0
+    },
+    {
+        question: 'é mais de ___!!!',
+        answer: 'oito miiiiiilllll', 
+        theme: 'DragonBall', 
+        flipped: false,
+        revealed: false,
+        result: 0
+    },
+    {
+        question: 'Qual o nome do protagonista?',
+        answer: 'Luffy (Piratinha que estica)', 
+        theme: "One Piece", 
+        flipped: false, 
+        revealed: false, 
+        result: 0
+    },
+    {
+        question: 'Quantos episodios tem o anime?',
+        answer: '+1000', 
+        theme: "One Piece", 
+        flipped: false, 
+        revealed: false, 
+        result: 0
+    },
+    {
+        question: 'O anime vai acabar? ',
+        answer: 'Só deus sabe', 
+        theme: "One Piece", 
+        flipped: false, 
+        revealed: false, 
+        result: 0
+    },
+    {
+        question: 'O lele-san gosta do anime?',
+        answer: 'Infelizmente não', 
+        theme: "One Piece", 
+        flipped: false, 
+        revealed: false, 
+        result: 0
+    }
 ];
 
 function Forms({ handleData, children }) {

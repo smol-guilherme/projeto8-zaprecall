@@ -118,9 +118,6 @@ export default function Game({ start, DEFAULTS, theme, quota, setOptions }) {
         start();
     }
 
-    console.log(cards)
-    console.log(DEFAULTS)
-
     function pickTheme() {
         if (theme.length !== 0) {
             const newSet = [...DEFAULTS.filter((card) => card.theme === theme)];
