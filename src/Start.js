@@ -2,7 +2,7 @@ import React from "react";
 import Game from "./Game";
 
 const DEFAULTS = [
-    {   
+    {
         question: 'O que é JSX? ',
         answer: 'Uma extensão de linguagem do JavaScript',
         theme: 'React',
@@ -68,65 +68,77 @@ const DEFAULTS = [
     },
 ];
 
-function Forms({ handleData }) {
-    const themes = [];
-
-    DEFAULTS.forEach((item) => {
-        console.log(item.theme)  
-        if(!themes.includes(item.theme))
-            themes.push(item.theme)
-    })
-
-    return(
-        <form className="forms" onSubmit={handleData}>
-            <input className="quota" placeholder="Escolha sua meta de zaps" type="number" min={1} max={DEFAULTS.length} required></input>
-            <select className="theme" >
-                <option value="" disabled selected>Selecione seu deck</option>
-                {themes.map((t, index) => <option key={index} value={t}>{t}</option>)}
-            </select>
-            <button className="button" type="submit">Iniciar Recall</button>
+function Forms({ handleData, children }) {
+    return (
+        <form className="forms" onSubmit={handleData} >
+            { children }
         </form>
     )
 }
 
-function Main({ start, handleData }) {
+function Main({ handleData, options }) {
+    const themes = [];
+
+    DEFAULTS.forEach((item) => {
+        if (!themes.includes(item.theme))
+            themes.push(item.theme)
+    })
+
     return (
         <div className="main-screen">
             <img className="main-logo" src="./content/logo.png" alt="./content/flash.png" />
             <div className="title">ZapRecall</div>
-            <Forms handleData={handleData} />
+            {
+                options.length === 0 ?
+                    <Forms handleData={handleData}>
+                        <input className="quota" placeholder="Escolha sua meta de zaps" type="number" min={1} max={DEFAULTS.length} required></input>
+                        <button className="button" type="submit">Iniciar Recall</button>
+                    </Forms> :
+                    <Forms handleData={handleData}>
+                        <select className="theme" >
+                            <option value="" disabled selected>Selecione seu deck</option>
+                            {themes.map((t, index) => <option key={index} value={t}>{t}</option>)}
+                        </select>
+                        <button className="button" type="submit">Iniciar Recall</button>
+                    </Forms>
+            }
         </div>
     )
 }
 
 export default function Start() {
     const [start, setStart] = React.useState(false);
-    const options = [];
+    const [options, setOptions] = React.useState([]);
 
     function handleData(submitEvent) {
         submitEvent.preventDefault();
         const forms = submitEvent.target;
-        for(const item of forms) {
-            if(item.type !== 'submit') {
-                options.push(item.value);
-            }
+        switch(forms[0].type) {
+            case 'number':
+                setOptions(forms[0].value);
+                break;
+            case 'select-one':
+                const newOpt = [...options, forms[0].value]
+                setOptions(newOpt);
+                startGame();
+                break;
+            default:
+                break;
         }
-        console.log(options)
-        startGame();
     }
 
     function startGame() {
-        if(!start && options[0] !== undefined) {
+        if (!start && options[0] !== undefined) {
             setStart(!start)
         }
     }
 
-    return(
+    return (
         <div>
             {
-                !start ? 
-                <Main handleData={handleData} start={startGame} /> : 
-                <Game quota={options[0]} theme={options[1]} DEFAULTS={DEFAULTS} start={startGame} /> 
+                !start ?
+                    <Main options={options} handleData={handleData} /> :
+                    <Game quota={options[0]} theme={options[1]} DEFAULTS={DEFAULTS} start={startGame} />
             }
         </div>
     )

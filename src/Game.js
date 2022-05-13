@@ -1,6 +1,8 @@
 import Logo from "./Logo";
 import React from "react";
 
+const RNG = 0.33;
+
 function Cover({ index, reveal, icons, result }) {
     return(
         <div className="cover">
@@ -89,12 +91,17 @@ export default function Game({ start, DEFAULTS, theme, quota }) {
     const [answers, setAnswers] = React.useState([]);
     const [cards, setCards] = React.useState(pickTheme());
     
+    function randomize() {
+        return Math.random() - RNG;
+    }
+    
     function pickTheme() {
-        console.log(theme)
-        if(theme === "") {
+        if(theme.length !== 0) {
             const newSet = DEFAULTS.filter((card) => card.theme === theme)
+            newSet.sort(randomize)
             return newSet;    
         }
+        DEFAULTS.sort(randomize)
         return DEFAULTS;
     }
 
