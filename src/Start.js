@@ -1,5 +1,6 @@
 import React from "react";
 import Game from "./Game";
+import Main from "./components/Main";
 
 const DEFAULTS = [
     {
@@ -148,44 +149,6 @@ const DEFAULTS = [
     }
 ];
 
-function Forms({ handleData, children }) {
-    return (
-        <form className="forms" onSubmit={handleData} >
-            { children }
-        </form>
-    )
-}
-
-function Main({ handleData, options }) {
-    const themes = [];
-
-    DEFAULTS.forEach((item) => {
-        if (!themes.includes(item.theme))
-            themes.push(item.theme)
-    })
-
-    return (
-        <div className="main-screen">
-            <img className="main-logo" src="./content/logo.png" alt="./content/flash.png" />
-            <div className="title">ZapRecall</div>
-            {
-                options.length === 0 ?
-                    <Forms handleData={handleData}>
-                        <input className="quota" placeholder="Escolha sua meta de zaps" type="number" min={1} max={DEFAULTS.length} required></input>
-                        <button className="button" type="submit">Iniciar Recall</button>
-                    </Forms> :
-                    <Forms handleData={handleData}>
-                        <select className="theme" >
-                            <option value="" disabled selected>Selecione seu deck</option>
-                            {themes.map((t, index) => <option key={index} value={t}>{t}</option>)}
-                        </select>
-                        <button className="button" type="submit">Iniciar Recall</button>
-                    </Forms>
-            }
-        </div>
-    )
-}
-
 export default function Start() {
     const [start, setStart] = React.useState(false);
     const [options, setOptions] = React.useState([]);
@@ -215,8 +178,8 @@ export default function Start() {
         <div>
             {
                 !start ?
-                    <Main options={options} handleData={handleData} /> :
-                    <Game quota={options[0]} theme={options[1]} DEFAULTS={DEFAULTS} start={startGame} setOptions={setOptions} />
+                <Main options={options} handleData={handleData} DEFAULTS={DEFAULTS} /> :
+                <Game quota={options[0]} theme={options[1]} DEFAULTS={DEFAULTS} start={startGame} setOptions={setOptions} />
             }
         </div>
     )

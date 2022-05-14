@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import App from './App';
 
-const pageBody = document.querySelector('.root');
-const pageTop = App();
+import './assets/css/reset.css'
+import './assets/css/style.css'
 
-ReactDOM.render(pageTop, pageBody);
+ReactDOM.render(<App />, document.querySelector('.root'));
