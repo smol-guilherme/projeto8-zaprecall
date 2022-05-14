@@ -1,8 +1,8 @@
 import React from "react";
-import Logo from "./components/Logo";
-import Cover from "./components/Cover";
-import Cards from "./components/Cards";
-import Bottom from "./components/Bottom";
+import Logo from "./Logo";
+import Cover from "./Cover";
+import Cards from "./Cards";
+import Bottom from "./Bottom";
 
 const RNG = 0.33;
 
