@@ -62,7 +62,7 @@ ion-icon[name="checkmark-circle"] {
     min-width: 110px;
     object-fit: contain;
     margin: 0 auto;
-    margin-top: 5vh;
+    margin-top: 15vh;
     margin-bottom: 10%;
 }
 
@@ -284,10 +284,10 @@ input[type=number] {
     display: none;
 }
 
-@media (max-width: 614px) {
+@media (max-width: 613px) {
     .main-screen {
-        padding: 10% 10%;
-        padding-bottom: 15%;
+        padding: 0 10%;
+        padding-bottom: 20%;
         overflow-x: hidden;
     }
 }

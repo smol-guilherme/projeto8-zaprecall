@@ -149,7 +149,7 @@ const DEFAULTS = [
     },
     {
         question: 'A cultura do BIRL foi difundida por __',
-        answer: 'Leo Stronda',
+        answer: 'Cléber Bambam',
         theme: 'Memes',
         flipped: false,
         revealed: false,
