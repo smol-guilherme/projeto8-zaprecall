@@ -221,40 +221,6 @@ const DEFAULTS = [
     },
 ];
 
-// {
-// question: '',
-// answer: '',
-// theme: '',
-// flipped: false,
-// revealed: false,
-// result: 0
-// },
-
-// {
-// question: '',
-// answer: '',
-// theme: 'Genshin Impact',
-// flipped: false,
-// revealed: false,
-// result: 0
-// },
-// {
-// question: '__ é o Lobo do Norte',
-// answer: 'Andrius',
-// theme: 'Genshin Impact',
-// flipped: false,
-// revealed: false,
-// result: 0
-// },
-// {
-// question: 'Os nomes dos deuses são baseados no livro __',
-// answer: 'Ars Goetia',
-// theme: 'Genshin Impact',
-// flipped: false,
-// revealed: false,
-// result: 0
-// },
-
 export default function Start() {
     const [start, setStart] = React.useState(false);
     const [options, setOptions] = React.useState([]);
