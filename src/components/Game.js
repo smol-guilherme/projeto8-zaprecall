@@ -4,17 +4,13 @@ import Cover from "./Cover";
 import Cards from "./Cards";
 import Bottom from "./Bottom";
 
-const RNG = 0.33;
+const RNG = 0.50;
 
 export default function Game({ start, DEFAULTS, theme, quota, setOptions }) {
     const icons = ["play-outline", "close-circle", "help-circle", "checkmark-circle"]
     const [count, setCount] = React.useState(0);
     const [answers, setAnswers] = React.useState([]);
     const [cards, setCards] = React.useState(pickTheme);
-
-    function randomize() {
-        return Math.random() - RNG;
-    }
 
     function resetAll() {
         setCards([]);
@@ -25,12 +21,14 @@ export default function Game({ start, DEFAULTS, theme, quota, setOptions }) {
     }
 
     function pickTheme() {
+        console.log("theme")
         if (theme.length !== 0) {
+            console.log("theme in")
             const newSet = [...DEFAULTS.filter((card) => card.theme === theme)];
-            return newSet.sort(randomize);
+            return newSet.sort(() => Math.random() - RNG);
         }
         const defaultSet = [...DEFAULTS]
-        return defaultSet.sort(randomize);
+        return defaultSet.sort(() => Math.random() - RNG);
     }
 
     function revealCard(revealIndex) {
