@@ -21,9 +21,7 @@ export default function Game({ start, DEFAULTS, theme, quota, setOptions }) {
     }
 
     function pickTheme() {
-        console.log("theme")
         if (theme.length !== 0) {
-            console.log("theme in")
             const newSet = [...DEFAULTS.filter((card) => card.theme === theme)];
             return newSet.sort(() => Math.random() - RNG);
         }
